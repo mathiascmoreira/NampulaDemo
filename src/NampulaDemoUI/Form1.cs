@@ -7,10 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Nampula.UI;
 
 namespace WindowsFormsApplication2
 {
-    public partial class Form1 : Form
+    public partial class Form1 : Nampula.UI.Form
     {
         public Form1()
         {

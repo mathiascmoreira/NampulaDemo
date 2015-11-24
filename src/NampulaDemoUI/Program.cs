@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Nampula.UI;
 using System.Windows.Forms;
+
 
 namespace WindowsFormsApplication2
 {
@@ -14,9 +16,28 @@ namespace WindowsFormsApplication2
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            var app = Nampula.UI.Application.GetInstance();
+
+            app.OnStartCreateMenu += app_OnStartCreatMenu;
+
+            if (app.StartApplication("Nampula", eAppType.SAPForms))
+                System.Windows.Forms.Application.Run(app.MainForm());
+                    
+
+        }
+
+        private static void app_OnStartCreatMenu(object sender, ApplicationEventArgs e)
+        {
+            var moduloMenu = Nampula.UI.Application.GetInstance().GetMenu(MenuID.cBoUIModulesMenu);
+            var menuGroup = new Nampula.UI.MenuItem(moduloMenu, BoMenuType.mt_POPUP,"Nampula Demo");
+            var menuNampulaForm = new Nampula.UI.MenuItem(menuGroup, BoMenuType.mt_STRING, "teste");
+                menuNampulaForm.OnAfterClick += menuNampulaForm_OnAfterClick;
+
+        }
+
+        private static void menuNampulaForm_OnAfterClick(object sender, MenuEventArgs e)
+        {
+            new Form1().Show();
         }
     }
 }
