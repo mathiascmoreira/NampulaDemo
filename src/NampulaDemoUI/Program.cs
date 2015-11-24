@@ -4,7 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Nampula.UI;
 using System.Windows.Forms;
-
+using NampulaDemoDI;
+using NampulaDemoDI.Factory;
 
 namespace WindowsFormsApplication2
 {
@@ -19,10 +20,17 @@ namespace WindowsFormsApplication2
             var app = Nampula.UI.Application.GetInstance();
 
             app.OnStartCreateMenu += app_OnStartCreatMenu;
+            app.OnStartConnection += app_OnStartConnection;
 
             if (app.StartApplication("Nampula", eAppType.SAPForms))
                 System.Windows.Forms.Application.Run(app.MainForm());
                     
+
+        }
+
+        private static void app_OnStartConnection(object sender, ApplicationEventArgs e)
+        {
+            new DBNampula().Start(Nampula.UI.Application.GetInstance().GetParam());
 
         }
 

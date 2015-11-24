@@ -1,5 +1,5 @@
-C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoDI\bin\x86\Debug\ClassLibrary1.dll
-C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoDI\bin\x86\Debug\ClassLibrary1.pdb
+C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoDI\bin\x86\Debug\NampulaDemoDI.dll
+C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoDI\bin\x86\Debug\NampulaDemoDI.pdb
 C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoDI\bin\x86\Debug\DevExpress.Data.v13.2.dll
 C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoDI\bin\x86\Debug\DevExpress.Office.v13.2.Core.dll
 C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoDI\bin\x86\Debug\DevExpress.Printing.v13.2.Core.dll
@@ -69,6 +69,8 @@ C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDe
 C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoDI\bin\x86\Debug\es\DevExpress.XtraTreeList.v13.2.resources.dll
 C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoDI\bin\x86\Debug\ja\DevExpress.XtraTreeList.v13.2.resources.dll
 C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoDI\bin\x86\Debug\ru\DevExpress.XtraTreeList.v13.2.resources.dll
+C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoDI\obj\x86\Debug\NampulaDemoDI.Properties.Resources.resources
+C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoDI\obj\x86\Debug\NampulaDemoDI.csproj.GenerateResource.Cache
+C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoDI\obj\x86\Debug\NampulaDemoDI.dll
+C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoDI\obj\x86\Debug\NampulaDemoDI.pdb
 C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoDI\obj\x86\Debug\NampulaDemoDI.csprojResolveAssemblyReference.cache
-C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoDI\obj\x86\Debug\ClassLibrary1.dll
-C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoDI\obj\x86\Debug\ClassLibrary1.pdb

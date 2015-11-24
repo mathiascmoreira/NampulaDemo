@@ -106,6 +106,18 @@
     <Reference Include="Nampula.BackgroundTask">
       <HintPath>..\..\lib\NampulaDev13SAP9\Nampula.BackgroundTask.dll</HintPath>
     </Reference>
+    <Reference Include="Nampula.DI, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\NampulaDev13SAP9\Nampula.DI.dll</HintPath>
+    </Reference>
+    <Reference Include="Nampula.DI.B1, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\NampulaDev13SAP9\Nampula.DI.B1.dll</HintPath>
+    </Reference>
+    <Reference Include="Nampula.Framework, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\NampulaDev13SAP9\Nampula.Framework.dll</HintPath>
+    </Reference>
     <Reference Include="Nampula.UI">
       <HintPath>..\..\lib\NampulaDev13SAP9\Nampula.UI.dll</HintPath>
     </Reference>
@@ -133,6 +145,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

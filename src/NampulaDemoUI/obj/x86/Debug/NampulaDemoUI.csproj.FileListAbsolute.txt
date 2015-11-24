@@ -1,7 +1,6 @@
 C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoUI\bin\x86\Debug\WindowsFormsApplication2.exe.config
 C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoUI\bin\x86\Debug\WindowsFormsApplication2.exe
 C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoUI\bin\x86\Debug\WindowsFormsApplication2.pdb
-C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoUI\bin\x86\Debug\ClassLibrary1.dll
 C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoUI\bin\x86\Debug\DevExpress.Data.v13.2.dll
 C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoUI\bin\x86\Debug\DevExpress.Office.v13.2.Core.dll
 C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoUI\bin\x86\Debug\DevExpress.Printing.v13.2.Core.dll
@@ -19,11 +18,13 @@ C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDe
 C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoUI\bin\x86\Debug\log4net.dll
 C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoUI\bin\x86\Debug\Nampula.BackgroundTask.dll
 C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoUI\bin\x86\Debug\Nampula.UI.dll
+C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoUI\bin\x86\Debug\NampulaDemoDI.dll
 C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoUI\bin\x86\Debug\SapDesign.dll
 C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoUI\bin\x86\Debug\Nampula.DI.dll
+C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoUI\bin\x86\Debug\Interop.SAPbouiCOM.dll
 C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoUI\bin\x86\Debug\Nampula.DI.B1.dll
 C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoUI\bin\x86\Debug\Nampula.Framework.dll
-C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoUI\bin\x86\Debug\ClassLibrary1.pdb
+C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoUI\bin\x86\Debug\NampulaDemoDI.pdb
 C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoUI\bin\x86\Debug\DevExpress.Data.v13.2.xml
 C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoUI\bin\x86\Debug\DevExpress.Office.v13.2.Core.xml
 C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoUI\bin\x86\Debug\DevExpress.Printing.v13.2.Core.xml
@@ -72,10 +73,10 @@ C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDe
 C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoUI\bin\x86\Debug\ja\DevExpress.XtraTreeList.v13.2.resources.dll
 C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoUI\bin\x86\Debug\ru\DevExpress.XtraTreeList.v13.2.resources.dll
 C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoUI\obj\x86\Debug\NampulaDemoUI.csprojResolveAssemblyReference.cache
+C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoUI\obj\x86\Debug\Interop.SAPbouiCOM.dll
+C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoUI\obj\x86\Debug\NampulaDemoUI.csproj.ResolveComReference.cache
 C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoUI\obj\x86\Debug\WindowsFormsApplication2.Properties.Resources.resources
 C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoUI\obj\x86\Debug\NampulaDemoUI.csproj.GenerateResource.Cache
 C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoUI\obj\x86\Debug\WindowsFormsApplication2.exe
 C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoUI\obj\x86\Debug\WindowsFormsApplication2.pdb
-C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoUI\bin\x86\Debug\Interop.SAPbouiCOM.dll
-C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoUI\obj\x86\Debug\Interop.SAPbouiCOM.dll
-C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoUI\obj\x86\Debug\NampulaDemoUI.csproj.ResolveComReference.cache
+C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoUI\obj\x86\Debug\WindowsFormsApplication2.Form1.resources
