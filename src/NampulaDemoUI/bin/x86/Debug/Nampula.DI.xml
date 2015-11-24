@@ -1,0 +1,2331 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Nampula.DI</name>
+    </assembly>
+    <members>
+        <member name="T:Nampula.DI.AlterProcedure">
+            <summary>
+            Classe para tratamento de alterações de StoredProcedures do SAP
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.AlterProcedure.UpdateProc(System.String,System.String,System.String,System.String,System.Text.StringBuilder)">
+            <summary>
+            Altera a store procedure
+            </summary>
+            <param name="pSpName">Nome da Store Procedure</param>
+            <param name="pCompanyDb">Nome do Banco de dados da empresa</param>
+            <param name="pStart">Texto de Inicio do Trecho do código</param>
+            <param name="pEnd">Texto do fim do trecho do código</param>
+            <param name="pText">Código da código a se adicionado a SP</param>
+        </member>
+        <member name="M:Nampula.DI.AlterProcedure.RemoveCodeProc(System.String,System.String,System.String,System.String)">
+            <summary>
+            Remove o trecho do código da procedure
+            </summary>
+            <param name="pSpName">Nome da Store Procedure</param>
+            <param name="pCompanyDb">Nome do Banco de dados da empresa</param>
+            <param name="pStart">Texto de Inicio do Trecho do código</param>
+            <param name="pEnd">Texto do fim do trecho do código</param>
+        </member>
+        <member name="M:Nampula.DI.AlterProcedure.Exists(System.String,System.String,System.String)">
+            <summary>
+            Verifica se o código existe na SP
+            </summary>
+            <param name="pSpName">Nome da Procedure</param>
+            <param name="pCompanyDb">Nome do Banco de dados da empresa</param>
+            <param name="pStart">O Texto de inicio do trecho</param>
+        </member>
+        <member name="M:Nampula.DI.AlterProcedure.Exec(System.String,System.String)">
+            <summary>
+            Executa a atualização do código da SP
+            </summary>
+            <param name="pText">Procedire</param>
+            <param name="pCompanyDb">Nome do Banco de dados da empresa</param>
+        </member>
+        <member name="M:Nampula.DI.AlterProcedure.GetSpText(System.String,System.String)">
+            <summary>
+            Pega o código da procedure
+            </summary>
+            <param name="procedureName">Nome da Procedure</param>
+            <param name="pCompanyDb">Nome da Empresa</param>
+            <returns>Um SP com o texto da procedure</returns>
+        </member>
+        <member name="T:Nampula.DI.AlterProcedure.SpNames">
+            <summary>
+            Nome das Procedures do SAP
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.Connection">
+            <summary>
+            Classe que gerencia conexões com o banco de dados
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.Connection.#ctor">
+            <summary>
+            Construtor padrão
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.Connection.GetInstance">
+            <summary>
+            Pega a instancia
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Nampula.DI.Connection.Clone">
+            <summary>
+            Clona o objeto
+            </summary>
+            <returns>Um objeto connection</returns>
+        </member>
+        <member name="M:Nampula.DI.Connection.Disconnect">
+            <summary>
+            Desconecta do banco de dados
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.Connection.Connect">
+            <summary>
+            Tenta uma conexão com o banco de dados
+            </summary>
+            <returns>True de conectar, false se não conectar</returns>
+        </member>
+        <member name="M:Nampula.DI.Connection.Connected">
+            <summary>
+            Verifica se está conectado no banco de dados
+            </summary>
+            <returns>True se estiver conectado, falso caso contrário</returns>
+        </member>
+        <member name="M:Nampula.DI.Connection.GetConnString">
+            <summary>
+            Pega a string de conecão
+            </summary>
+            <returns>Um string</returns>
+        </member>
+        <member name="M:Nampula.DI.Connection.GetDbConnection">
+            <summary>
+            Pega o objeto de conexão
+            </summary>
+            <returns>Um DbConnection</returns>
+        </member>
+        <member name="M:Nampula.DI.Connection.StartQuery">
+            <summary>
+            Inicia uma transação no banco
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.Connection.EndQuery">
+            <summary>
+            Finalza uma conexão
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.Connection.SqlServerExecute(System.String)">
+            <summary>
+            Executa um comando SQl na conexão atual
+            </summary>
+            <param name="pCommand">Um sting com o comando SQl</param>
+            <returns>True se for executado com sucesso</returns>
+        </member>
+        <member name="M:Nampula.DI.Connection.SqlServerExecute(System.Data.IDbCommand)">
+            <summary>
+            Executa um comando SQl na conexão atual
+            </summary>
+            <param name="pCommand">Um comando de SQl</param>
+            <returns>True se for executado com sucesso</returns>
+        </member>
+        <member name="M:Nampula.DI.Connection.SqlServerQuery(System.String)">
+            <summary>
+            Executa um comando no banco de dados e retorna o resultado.
+            </summary>
+            <param name="pCommand">Um comando sql que retorna resultado</param>
+            <returns>Um DataTable com o resultado da query</returns>
+        </member>
+        <member name="M:Nampula.DI.Connection.SqlServerQuery(System.Data.IDbCommand)">
+            <summary>
+            Executa um comando no banco de dados e retorna o resultado.
+            </summary>
+            <param name="pCommand">Um comando que retorne resultado</param>
+            <returns>Um DataTable com o resultado da query</returns>
+        </member>
+        <member name="M:Nampula.DI.Connection.SqlExecuteScalar``1(System.String)">
+            <summary>
+            Executa um comando scalar no banco de dados e retorna o resultado.
+            </summary>
+            <typeparam name="TT">O tipo do resultado</typeparam>
+            <param name="pCommand">Um comando sql que retorna resultado</param>
+            <returns>o valor da consulta</returns>
+        </member>
+        <member name="M:Nampula.DI.Connection.SqlExecuteScalar``1(System.Data.IDbCommand)">
+            <summary>
+            Executa um comando scalar no banco de dados e retorna o resultado.
+            </summary>
+            <typeparam name="TT">O tipo do resultado</typeparam>
+            <param name="pCommand">Um comando sql que retorna resultado></param>
+            <returns>o valor da consulta</returns>
+        </member>
+        <member name="M:Nampula.DI.Connection.StartTransaction">
+            <summary>
+            Inicia a transação
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.Connection.InTransaction">
+            <summary>
+            Verifica se está em transação
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Nampula.DI.Connection.EndTransaction(Nampula.DI.eEndTrans)">
+            <summary>
+            Finaliza transação
+            </summary>
+            <param name="pEndTransac">Tipo de Finalização</param>
+        </member>
+        <member name="M:Nampula.DI.Connection.RenameTable(System.String,System.String,System.String)">
+            <summary>
+            Renomei uma tabela
+            </summary>
+            <param name="dbName">Nome do Banco de dados</param>
+            <param name="tableName">Nome da Tabela</param>
+            <param name="pNewTableName">Nome da Nova tabela</param>
+        </member>
+        <member name="M:Nampula.DI.Connection.RenameColumn(System.String,System.String,System.String,System.String)">
+            <summary>
+            Renomeia uma columna
+            </summary>
+            <param name="pDBName">Nome do Banco de dados</param>
+            <param name="pTableName">Nome da Tabela</param>
+            <param name="pColumn">Nome da Coluna</param>
+            <param name="pNewColumn">Nome da Nova Coluna</param>
+        </member>
+        <member name="M:Nampula.DI.Connection.DropTable(System.String)">
+            <summary>
+            Exclui uam tabela se a mesma existir
+            </summary>
+            <param name="pTableName">Nome da Tabela</param>
+        </member>
+        <member name="M:Nampula.DI.Connection.RenameIndex(System.String,System.String,System.String)">
+            <summary>
+            Renomei uma tabela
+            </summary>
+            <param name="pDBName">Nome do Banco de dados</param>
+            <param name="pIndex">Indice</param>
+            <param name="pNewIndex">Nome da Novo Indece</param>
+        </member>
+        <member name="P:Nampula.DI.Connection.ConnectionParameter">
+            <summary>
+            Parametros de Conexão
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.Connection.Instance">
+            <summary>
+            Pega uma única instancia da classe
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.ConnectionParameter">
+            <summary>
+            Parametros de conexão
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.ConnectionParameter.#ctor">
+            <summary>
+            Construtor padrão
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.ConnectionParameter.#ctor(Nampula.DI.ConnectionParameter)">
+            <summary>
+            Instancia a classe e copia os dados apartir de um objeto
+            </summary>
+            <param name="pConnection">Objeto de cópia</param>
+        </member>
+        <member name="P:Nampula.DI.ConnectionParameter.Server">
+            <summary>
+            Seridor do banco de dados
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.ConnectionParameter.ServerPort">
+            <summary>
+            Porta TCP do Servidor
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.ConnectionParameter.LicenseServer">
+            <summary>
+            Servidor de Licença
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.ConnectionParameter.DBUser">
+            <summary>
+            Usuário do banco de dados
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.ConnectionParameter.DBPassword">
+            <summary>
+            Senha do banco de dados
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.ConnectionParameter.Database">
+            <summary>
+            Banco de dados
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.ConnectionParameter.ApplicationName">
+            <summary>
+            Nome da Aplicação
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.ConnectionParameter.DbServerType">
+            <summary>
+            Tipo do Servidor
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.ConnectionParameter.CompanyDb">
+            <summary>
+            Banco de dados da Empresa do SAP
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.ConnectionParameter.UserName">
+            <summary>
+            Usuário do SAP
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.ConnectionParameter.Password">
+            <summary>
+            Senha do usuário do SAP
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.ConnectionParameter.IsHostedEnvironment">
+            <summary>
+            Identifica se está rodando dentro de um Hosted Company
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.InformationSchemaColumn">
+            <summary>
+            Informação dos Registros de objetos de dados
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.TableAdapter">
+            <summary>
+            Classe para gerencimento de tabelas do banco de dados.
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.DataObject">
+            <summary>
+            Classe base para tratamento de objeto do banco de dados
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.DataObject.#ctor">
+            <summary>
+            Construtor padrão
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.DataObject.SetQuote(System.String)">
+            <summary>
+            Atribui os limites da esquerda e direita no nome de um objeto do banco
+            </summary>
+            <param name="pName">Nome</param>
+            <returns>Uma stringo com as chaves.</returns>
+        </member>
+        <member name="M:Nampula.DI.DataObject.MakeFullTableName(System.String,System.String)">
+            <summary>
+            Cria o caminho completo da tabela
+            </summary>
+            <param name="dbName">Nome do banco de dados</param>
+            <param name="tableName">Nome da tabela</param>
+            <returns>Uma string com o nome da tabela</returns>
+        </member>
+        <member name="M:Nampula.DI.DataObject.SetConnection(Nampula.DI.Connection)">
+            <summary>
+            Atribui uma conexão ao objeto
+            </summary>
+            <param name="pConnection">Uma conexão com o banco de dados</param>
+        </member>
+        <member name="P:Nampula.DI.DataObject.Connection">
+            <summary>
+            Dados de Conexão com o banco de dados
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.DataObject.DBName">
+            <summary>
+            Nome do banco de dados
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.TableAdapter.#ctor">
+            <summary>
+            Instancia um objeto TableAdapter
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.TableAdapter.#ctor(System.String,System.Boolean)">
+            <summary>
+            Innstancia um objeto TableAdapter
+            </summary>
+            <param name="pTableName">Nome da Tabela</param>
+            <param name="autoLog">Geração automatica de log</param>
+        </member>
+        <member name="M:Nampula.DI.TableAdapter.#ctor(System.String,System.String)">
+            <summary>
+            Instancia um objeto TableAdapter
+            </summary>
+            <param name="pDbName">Nome do Banco de dados</param>
+            <param name="pTableName">Nome da Tabela</param>
+        </member>
+        <member name="M:Nampula.DI.TableAdapter.FillCollumns">
+            <summary>
+            PReenche as colunms da atbela de acordo com as Campos TableAdapterFields
+            Instanciano na classe base
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.TableAdapter.col_PropertyChanging(System.Object,System.ComponentModel.PropertyChangingEventArgs)">
+            <summary>
+            Evento tisparado quando alguma proriedade está sendo alterada
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Nampula.DI.TableAdapter.col_PropertyChanged(System.Object,System.ComponentModel.PropertyChangedEventArgs)">
+            <summary>
+            Evento tisparado quando alguma proriedade eh alterada
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Nampula.DI.TableAdapter.GetInsertCommand">
+            <summary>
+            Pega o comando de inserção
+            </summary>
+            <returns>Um Db command preenchiodo</returns>
+        </member>
+        <member name="M:Nampula.DI.TableAdapter.GetUpdateCommand">
+            <summary>
+            Pega o comando de atualização
+            </summary>
+            <returns>Um DbCOmmand</returns>
+        </member>
+        <member name="M:Nampula.DI.TableAdapter.GetCreateCommand">
+            <summary>
+            Pega um comando de criação de tabaela
+            </summary>
+            <returns>Um comando</returns>
+        </member>
+        <member name="M:Nampula.DI.TableAdapter.GetCreateFieldType(Nampula.DI.TableAdapterField)">
+            <summary>
+            Pega uma string com o tipo do SQL Server de Criação
+            </summary>
+            <param name="tableAdapterField">o campo</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nampula.DI.TableAdapter.GetWhereCommand">
+            <summary>
+            Pega um string com clausula Where
+            </summary>
+            <returns>Uma string com o comando</returns>
+        </member>
+        <member name="M:Nampula.DI.TableAdapter.GetDeleteCommand">
+            <summary>
+            Pega o camando delete
+            </summary>
+            <returns>Um DbComando com o camando para excluir</returns>
+        </member>
+        <member name="M:Nampula.DI.TableAdapter.SetParameters(System.Data.IDbCommand@,System.Collections.Generic.IEnumerable{Nampula.DI.TableAdapterField})">
+            <summary>
+            Atribui parametros ao comando
+            </summary>
+            <param name="pCommand">Um Comando</param>
+            <param name="pColumns">Lista de Colunas</param>
+        </member>
+        <member name="M:Nampula.DI.TableAdapter.GetSelectCommand">
+            <summary>
+            Pega o camando de Seleção de Registros
+            </summary>
+            <returns>Um comando com o select</returns>
+        </member>
+        <member name="M:Nampula.DI.TableAdapter.EndTransaction(System.Boolean,Nampula.DI.TableAdapterEventArgs)">
+            <summary>
+            Finaliza uma transação se for necessário
+            </summary>
+            <param name="pTransPrevious">Transação foi aberta antes</param>
+            <param name="pEventArgs">Argumentos do Evento</param>
+            <returns>True se fechar com sucessp</returns>
+        </member>
+        <member name="M:Nampula.DI.TableAdapter.StartTransaction(System.Boolean@)">
+            <summary>
+            Inicia transação, caso náo houver transação anterior
+            </summary>
+            <param name="pTransPrevious">True caso exista transação anterior</param>
+        </member>
+        <member name="M:Nampula.DI.TableAdapter.SetIdentityValue">
+            <summary>
+            Atribui os valores das chaves autoincremental
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.TableAdapter.Add">
+            <summary>
+            Adiciona um registro no banco de dados
+            </summary>
+            <returns>true se adicionar</returns>
+        </member>
+        <member name="M:Nampula.DI.TableAdapter.Remove">
+            <summary>
+            Remove o registro do banco de acordo com a chave
+            </summary>
+            <returns>True se remover</returns>
+        </member>
+        <member name="M:Nampula.DI.TableAdapter.Update">
+            <summary>
+            Atualiza o registro no banco de dados
+            </summary>
+            <returns>True se atualizar</returns>
+        </member>
+        <member name="M:Nampula.DI.TableAdapter.GetByKey">
+            <summary>
+            Pega o registro pelas chaves
+            </summary>
+            <returns>True se encontrar</returns>
+        </member>
+        <member name="M:Nampula.DI.TableAdapter.GetData(Nampula.DI.TableQuery)">
+            <summary>
+            Pega um dataTabloe de Acordo com uma Consulta TableQuery 
+            </summary>
+            <param name="pTableQuery">Um TableQuery</param>
+            <returns>Um DataTable</returns>
+        </member>
+        <member name="M:Nampula.DI.TableAdapter.GetData">
+            <summary>
+            Pega um dataTable todos os registros da tabela
+            </summary>
+            <returns>Um DataTable</returns>
+        </member>
+        <member name="M:Nampula.DI.TableAdapter.FillFields(System.Data.DataRow,System.Boolean)">
+            <summary>
+            Preenche os Columns de acordo com o dataRow
+            </summary>
+            <param name="pRow">Um datarow</param>
+            <param name="pLockNotify">Bloquei notificações</param>
+            <returns>True se preencher</returns>
+        </member>
+        <member name="M:Nampula.DI.TableAdapter.Create">
+            <summary>
+            Criar a tabela no banco de dados
+            </summary>
+            <returns>true se criar</returns>
+        </member>
+        <member name="M:Nampula.DI.TableAdapter.GetTableField(System.String)">
+            <summary>
+            Pega um campo pelo nome ou retorna null
+            </summary>
+            <param name="pFieldName">Nome do campo</param>
+            <returns>Um TableAdapterField</returns>
+        </member>
+        <member name="M:Nampula.DI.TableAdapter.AddLog(System.String)">
+            <summary>
+            Adiciona um novo log ao LogCollection
+            </summary>
+            <param name="pMessage">Mensagem</param>
+        </member>
+        <member name="M:Nampula.DI.TableAdapter.FullTableName">
+            <summary>
+            Pega o nome da tabela completo
+            </summary>
+            <returns>Um string com o nome da tabela</returns>
+        </member>
+        <member name="M:Nampula.DI.TableAdapter.FillDataRow(System.Data.DataRow)">
+            <summary>
+            Preenche p tableadapter com um dataRow
+            </summary>
+            <param name="dataRow">Um DataRow</param>
+            <returns>True se preencher</returns>
+        </member>
+        <member name="M:Nampula.DI.TableAdapter.CopyBy``1(``0)">
+            <summary>
+            Copia através os dados de um tableadapter
+            </summary>
+            <param name="pTableAdapter">Um TableAdapter</param>
+            <returns>True se copiar</returns>
+        </member>
+        <member name="M:Nampula.DI.TableAdapter.FillCollection``1(System.Data.DataRowCollection)">
+            <summary>
+            Prrenche uma coleção através de uma lista de DataRows
+            </summary>
+            <typeparam name="TObject">O tipo de destino</typeparam>
+            <param name="pRows">Lista de ROwsa</param>
+            <returns>Uma lista de <see cref="!:TObject "/></returns>
+        </member>
+        <member name="M:Nampula.DI.TableAdapter.FillCollection``1(System.Data.DataRow[])">
+            <summary>
+            Prrenche uma coleção através de uma lista de DataRows
+            </summary>
+            <typeparam name="TObject">O tipo de destino</typeparam>
+            <param name="pRows">Lista de ROwsa</param>
+            <returns>Uma lista de <see cref="!:TObject "/></returns>
+        </member>
+        <member name="M:Nampula.DI.TableAdapter.FillCollection``1(Nampula.DI.TableQuery)">
+            <summary>
+            Executa uma consulta no banco e retorna uma coleção de T
+            </summary>
+            <typeparam name="TObject">O tipo do TableAdapter</typeparam>
+            <param name="pTableQuery">Uma query</param>
+            <returns>Uma lista de T</returns>
+        </member>
+        <member name="M:Nampula.DI.TableAdapter.FillCollection``1">
+            <summary>
+            Retorna todos os objetos da tabela
+            </summary>
+            <typeparam name="TObject">O tipo do TableAdapter</typeparam>
+            <returns>Uma lista de T</returns>
+        </member>
+        <member name="M:Nampula.DI.TableAdapter.SaveLines``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Salva a coleção
+            </summary>
+            <typeparam name="TT">O tipo do TableAdapter</typeparam>
+            <param name="tableAdaptes">Uma lista de Coleções</param>
+            <returns>true se salvar</returns>
+        </member>
+        <member name="M:Nampula.DI.TableAdapter.UpdateValues">
+            <summary>
+            Atualiza a lista de valores iniciais
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.TableAdapter.RaiseBeforeLoadValues">
+            <summary>
+            Dispara o evento OnBeforeLoadValues
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.TableAdapter.RaiseAfterLoadValues">
+            <summary>
+            Dispara o evento OnAfterLoadValues
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.TableAdapter.SetPropertyChangedEvents">
+            <summary>
+            Atribui as alterações ocorridas aos eventos
+            </summary>
+        </member>
+        <member name="F:Nampula.DI.TableAdapter._propertyChangedNotify">
+            <summary>
+            Variável que da apoio a propriedades
+            </summary>
+        </member>
+        <member name="F:Nampula.DI.TableAdapter._propertyChangingNotify">
+            <summary>
+            Variável que da apoio a propriedades
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.TableAdapter.SetModifyState">
+            <summary>
+            Atribui o estado de update caso for banco de dados
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.TableAdapter.IsModifyState">
+            <summary>
+            Atribui o estado de update caso for banco de dados
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.TableAdapter.SetAutoLog(System.Boolean)">
+            <summary>
+            Hablita Log automático no tableAdapter
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableAdapter.LogCollection">
+            <summary>
+            Log gerado dentro de um execução dos commando Add,Update,Delete,Create
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableAdapter.StateRecord">
+            <summary>
+            Estado do Registro
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableAdapter.DataRow">
+            <summary>
+            O DataRow que representa o objeto
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableAdapter.Collumns">
+            <summary>
+            Lista de Coluns da Tabela
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableAdapter.KeyFields">
+            <summary>
+            Campos chave da tabela
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableAdapter.SchemaTable">
+            <summary>
+            Representa uma tabela de schema do banco
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableAdapter.TableName">
+            <summary>
+            Nome da Tabela
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableAdapter.InicialValues">
+            <summary>
+            Valores validos para a tebela
+            </summary>
+            <remarks>
+            Esse valor é usado para prenchimento da tabela no 
+            momento da criação dela e na atualização
+            </remarks>
+        </member>
+        <member name="P:Nampula.DI.TableAdapter.InicialValue">
+            <summary>
+            Indica se a tabela tem valores padrões.
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableAdapter.InicialFieldName">
+            <summary>
+            Qual o campo para identificar registros no banco de dados
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableAdapter.LockNotify">
+            <summary>
+            Bloquei notificações de alteração
+            </summary>
+        </member>
+        <member name="E:Nampula.DI.TableAdapter.PropertyChanged">
+            <summary>
+            Evento disparado quando alguma atualização é realizada
+            </summary>
+        </member>
+        <member name="E:Nampula.DI.TableAdapter.PropertyChanging">
+            <summary>
+            Evento disparado quando alguma atualização está sendo realizada
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableAdapter.PropertyChangedNotify">
+            <summary>
+            Propriedades que devem ser notificadas quando ocorrer uma atualização
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableAdapter.PropertyChangingNotify">
+            <summary>
+            Propriedades que devem ser notificadas quando estiver ocorrendo uma atualização.
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableAdapter.TableAdapterLog">
+            <summary>
+            Tabela de Log
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.InformationSchemaColumn.GetAll">
+            <summary>
+            Pega todos os registros
+            </summary>
+            <returns>Uma lista de informações dos schemas de banco</returns>
+        </member>
+        <member name="T:Nampula.DI.InformationSchemaColumn.FieldsName">
+            <summary>
+            Nome dos Campos
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.InformationSchemaColumn.Description">
+            <summary>
+            Descrição dos Campos
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.ScriptWizard.SqlServerScriptWizard">
+            <summary>
+            Classe para gerenciamento de scripts do banco de dados Sql
+            </summary>
+            <summary>
+            Classe para tratamento de scripts de alteração de tabelas do SQL Server
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.ScriptWizard.SqlServerScriptWizard.#ctor">
+            <summary>
+            Construtores
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.ScriptWizard.SqlServerScriptWizard.#ctor(Nampula.DI.TableQuery)">
+            <summary>
+            Instancia o objeto através da classe taleQuery
+            </summary>
+            <param name="pTableAdapter"></param>
+        </member>
+        <member name="M:Nampula.DI.ScriptWizard.SqlServerScriptWizard.GetSelectStatment(Nampula.DI.TableQuery,System.String,System.Int32,System.Int32,System.String,Nampula.DI.eOrder)">
+            <summary>
+            Limira a quantidade de registro que irá retornar em uma consulta
+            </summary>
+            <param name="pQuery">Query a ser executada</param>
+            <param name="pPageIdName">Código para o campo de contagem</param>
+            <param name="pStart">Linha Inicial</param>
+            <param name="pEnd">Linha Final</param>
+            <param name="pField">Campo de Ordenação</param>
+            <param name="pOrder">Direção da Ordenação</param>
+            <returns>Comando com a query a ser execudata</returns>
+        </member>
+        <member name="M:Nampula.DI.ScriptWizard.SqlServerScriptWizard.GetSelectStatment">
+            <summary>
+            Pega o comando da Query
+            </summary>
+            <returns>Um comando</returns>
+        </member>
+        <member name="M:Nampula.DI.ScriptWizard.SqlServerScriptWizard.GetSelectComplexStatment(Nampula.DI.TableQuery)">
+            <summary>
+            Pega somente o Select da Query
+            </summary>
+            <param name="pTableQuery">tablQuery</param>
+            <returns>Um comando</returns>
+        </member>
+        <member name="M:Nampula.DI.ScriptWizard.SqlServerScriptWizard.GetTableName(System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Pega o nome da tabela   
+            </summary>
+            <param name="pdbName">Nome do Banco</param>
+            <param name="pTableName">Nome da Tabela</param>
+            <param name="pAliasName">Nome do Slia</param>
+            <param name="schemaTable">Owner</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nampula.DI.ScriptWizard.SqlServerScriptWizard.GetFieldName(System.String,System.String,System.String)">
+            <summary>
+            Nome do Campo de Dados
+            </summary>
+            <param name="pTableAlias">Apelido do Banco dados</param>
+            <param name="pFieldName">Nome do Campo</param>
+            <param name="pAlias">Apelido do Campo</param>
+            <returns>Nome do Campo para ser consultado</returns>
+        </member>
+        <member name="M:Nampula.DI.ScriptWizard.SqlServerScriptWizard.GetJoinOn(Nampula.DI.WhereCollection)">
+            <summary>
+            Captura o Join do Banco de dados
+            </summary>
+            <param name="pOn">Tabelas</param>
+            <returns>Um string do Join</returns>
+        </member>
+        <member name="M:Nampula.DI.ScriptWizard.SqlServerScriptWizard.AddDataParameter(System.Data.IDbCommand@,Nampula.DI.QueryParam)">
+            <summary>
+            Adicione o parametro do banco de dados
+            </summary>
+            <param name="pDBCommand">Comando</param>
+            <param name="pQueryParam">Query</param>
+        </member>
+        <member name="M:Nampula.DI.ScriptWizard.SqlServerScriptWizard.CreateDataParameter(System.Data.IDbCommand,System.String,System.Data.DbType,System.Object)">
+            <summary>
+            Cria um parametro do banco de dados
+            </summary>
+            <param name="pDbCommand">Comando</param>
+            <param name="pFieldName">Nome do Banco de dados</param>
+            <param name="pDbTYpe">Tipo do Banco</param>
+            <param name="pValue">Valor do Banco</param>
+            <returns>Data Parameter</returns>
+        </member>
+        <member name="M:Nampula.DI.ScriptWizard.SqlServerScriptWizard.GetConditionFieldName(Nampula.DI.QueryParam,System.Boolean,System.Boolean)">
+            <summary>
+            Pega a condição
+            </summary>
+            <param name="pQueryParam">Parametro do Query</param>
+            <param name="pRelantionShip">Relacionado</param>
+            <param name="pWithNameParam">Com os parametros</param>
+            <returns>Nome do Campo para condição</returns>
+        </member>
+        <member name="M:Nampula.DI.ScriptWizard.SqlServerScriptWizard.GetConditionValue(Nampula.DI.QueryParam,System.Boolean)">
+            <summary>
+            Pega o nome do banco de dados
+            </summary>
+            <param name="pQueryParam">Parametros da query</param>
+            <param name="pWithNameParam">Com parametros</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nampula.DI.ScriptWizard.SqlServerScriptWizard.GetCondition(Nampula.DI.eCondition)">
+            <summary>
+            Pega o operado da condição
+            </summary>
+            <param name="eCondition">Tipo da Condição</param>
+            <returns>A string da condição</returns>
+        </member>
+        <member name="M:Nampula.DI.ScriptWizard.SqlServerScriptWizard.GetRelationShip(Nampula.DI.eRelationship)">
+            <summary>
+            Pega o operado booleando
+            </summary>
+            <param name="pRelationship">Tipo da Relação</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nampula.DI.ScriptWizard.SqlServerScriptWizard.GetStringBuilder">
+            <summary>
+            Pega a query montado dentro da string
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Nampula.DI.ScriptWizard.SqlServerScriptWizard.GetAlterTableCommand(Nampula.DI.TableAdapter)">
+            <summary>
+            Pega o comando de alteração da tabela
+            </summary>
+            <param name="pTable">Um Table Adapter</param>
+            <returns>Um string com o comando de alteração</returns>
+        </member>
+        <member name="M:Nampula.DI.ScriptWizard.SqlServerScriptWizard.GetAddColumns(Nampula.DI.TableAdapterFieldCollection)">
+            <summary>
+            Pega a lista de colunas que devem ser adicionada
+            </summary>
+            <param name="pTable">Uma lista de campos</param>
+            <returns>Um strng com os comandos para adiciona as colunas</returns>
+        </member>
+        <member name="M:Nampula.DI.ScriptWizard.SqlServerScriptWizard.GetCreateFieldType(System.Data.DbType,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Pega o tipo de campo no sql server
+            </summary>
+            <param name="pDbType">Tipo do Campo no ADO.NET </param>
+            <param name="pSize">Tamanho</param>
+            <param name="pPrecision">Precisão de milhar</param>
+            <param name="pScale">Escala de decimais</param>
+            <returns>uma string com o tipo do sql</returns>
+        </member>
+        <member name="P:Nampula.DI.ScriptWizard.SqlServerScriptWizard.TableQuery">
+            <summary>
+            Query utilizado para o script
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.ScriptWizard.SqlServerScriptWizard.Parameters">
+            <summary>
+            Lista de Parametros da Query
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.DataBases">
+            <summary>
+            Recupera todos os banco de dados da instancia atual
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.StoredProcedure">
+            <summary>
+            Classe para gerenciamento de procedures
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.StoredProcedure.#ctor">
+            <summary>
+            Construtor padrão
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.StoredProcedure.#ctor(System.String,System.String[])">
+            <summary>
+            Construtor da StoredProceudre que definio o nome e os arquivos
+            </summary>
+            <param name="pProcedureName">Nome da Procedure</param>
+            <param name="pFiles">Arquivos no assemlbly da procedure</param>
+        </member>
+        <member name="M:Nampula.DI.StoredProcedure.Execute(System.Boolean)">
+            <summary>
+            Executa a procedure no banco de dados
+            </summary>
+            <returns>true se for executado com sucesso.</returns>
+        </member>
+        <member name="M:Nampula.DI.StoredProcedure.Create">
+            <summary>
+            Cria a procedure no banco de dados
+            </summary>
+            <returns>True se for criado com sucesso.</returns>
+        </member>
+        <member name="M:Nampula.DI.StoredProcedure.Exists">
+            <summary>
+            Verifica se existe a procedure no banco de dados
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Nampula.DI.StoredProcedure.AddFile(System.String,System.String)">
+            <summary>
+            Adiciona um arquivo de acordo com a procedure
+            </summary>
+            <param name="pAssemblyName">Nome do Assemly</param>
+            <param name="pProcedureName">Nome da proceure</param>
+            <returns>True se for adicionado com sucesso</returns>
+        </member>
+        <member name="M:Nampula.DI.StoredProcedure.AddFile(System.Reflection.Assembly,System.String)">
+            <summary>
+            Adiciona um arquivo de acordo com a procedure
+            </summary>
+            <param name="pAssemblyName">Assembly</param>
+            <param name="procedureName">Nome da proceure</param>
+            <returns>True se for adicionado com sucesso</returns>
+        </member>
+        <member name="M:Nampula.DI.StoredProcedure.LoadFiles(System.Reflection.Assembly)">
+            <summary>
+            Le os arquivos das procedures no assemlbly
+            </summary>
+            <param name="pAssembly">Assembly onde a procedure está localizada</param>
+        </member>
+        <member name="M:Nampula.DI.StoredProcedure.Drop">
+            <summary>
+            Exclui a procedure no banco
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="E:Nampula.DI.StoredProcedure.OnBeforeCreateProcedure">
+            <summary>
+            Evento disparado antes de criar a procedure no banco
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.StoredProcedure.LogCollection">
+            <summary>
+            Logs 
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.StoredProcedure.Files">
+            <summary>
+            Arquivos com o corpo da procedure
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.StoredProcedure.ProcedureName">
+            <summary>
+            Nome da Procedure no banco de dados
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.StoredProcedure.Result">
+            <summary>
+            Resulta da Procedure
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.StoredProcedure.Collumns">
+            <summary>
+            Lista de Parametros da Procedure
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.StoredProcedure.FileNames">
+            <summary>
+            Lista de Nome de Arquivos
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.StoredProcedure.OnlyCreate">
+            <summary>
+            Somente cria a procedure se ele não existir
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.DataBases.#ctor">
+            <summary>
+            Construtor padrão
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.DataBases.FieldsName">
+            <summary>
+            Nome dos campos
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.DataBases.Description">
+            <summary>
+            Descrição dos Campos
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.DataBaseAdapter">
+            <summary>
+            Classe para gerenciamento do banco de dados
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.DataBaseAdapter.#ctor">
+            <summary>
+            Construtor padrão
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.DataBaseAdapter.Create">
+            <summary>
+            Cria o banco de dados
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.DataBaseAdapter.LoadObjects">
+            <summary>
+            Carrega todos os objetos do assembly do banco de dados
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.DataBaseAdapter.CreateProcedures(System.Collections.Generic.IEnumerable{Nampula.DI.StoredProcedure})">
+            <summary>
+            Cria todas as procedures
+            </summary>
+            <param name="pStoreds">Lista de Procedures</param>
+        </member>
+        <member name="M:Nampula.DI.DataBaseAdapter.CreateTables(System.Collections.Generic.IEnumerable{Nampula.DI.TableAdapter})">
+            <summary>
+            Cria todos os banco de dados
+            </summary>
+            <param name="pTables">Lista de tabelas</param>
+        </member>
+        <member name="M:Nampula.DI.DataBaseAdapter.Exists">
+            <summary>
+            Verifica se existe o banco de dados
+            </summary>
+            <returns>Tru se existir, false caso contrário</returns>
+        </member>
+        <member name="M:Nampula.DI.DataBaseAdapter.AlterTable(Nampula.DI.TableAdapter,System.Collections.Generic.IEnumerable{Nampula.DI.TableAdapterField})">
+            <summary>
+            Altera uma tabela
+            </summary>
+            <param name="pTable">Tabela</param>
+            <param name="pFields">Campos as ser aterado</param>
+        </member>
+        <member name="M:Nampula.DI.DataBaseAdapter.CheckUpdateDb">
+            <summary>
+            Verifica a versão do banco de dados e atualziar se for necessário.
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.DataBaseAdapter.UpdateDbVersion(System.Version,Nampula.DI.AppVersion,System.Version)">
+            <summary>
+            Atualiza a versão do banco de dasdos
+            </summary>
+            <param name="assemblyVersion">Versão do Assembly</param>
+            <param name="dbAppVersion">Objeto Table de Versão do Banco</param>
+            <param name="dbVersion">Versão do Banco  de dados</param>
+        </member>
+        <member name="M:Nampula.DI.DataBaseAdapter.UpdateInitialValues">
+            <summary>
+            Atualiza os valores de tabelas de moninio
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.DataBaseAdapter.AddVersionToDb(System.Version,Nampula.DI.AppVersion)">
+            <summary>
+            Adiciona versão do Assembly ao banco de dados
+            </summary>
+            <param name="pAssemblyVersion">A versão do Assembly</param>
+            <param name="pVersion">Objeto de Versao</param>
+        </member>
+        <member name="M:Nampula.DI.DataBaseAdapter.CreateVersionTable">
+            <summary>
+            Cria a tabela de versão do banco de dados, caso não exista.
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.DataBaseAdapter.CreateObject``1">
+            <summary>
+            Instancia um objeto de negócio
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.DataBaseAdapter.CreateObject``1(Nampula.DI.Connection)">
+            <summary>
+            Instancia um objeto de negócio
+            </summary>
+            <typeparam name="TT">Tipo do Objeto</typeparam>
+            <param name="pConnection">Conec'~ao</param>
+            <returns>Um novo objeto t Instanciado</returns>
+        </member>
+        <member name="M:Nampula.DI.DataBaseAdapter.GetInstanceObject(Nampula.DI.Connection,System.Type)">
+            <summary>
+            Pega uma instancia de um objeto que herda de DataObjet
+            </summary>
+            <param name="pConnection">Conexão</param>
+            <param name="pType">Tipo do Objeto</param>
+            <returns>Um objeto dataobjet instanciado</returns>
+        </member>
+        <member name="M:Nampula.DI.DataBaseAdapter.Start(Nampula.DI.ConnectionParameter)">
+            <summary>
+            Realiza conexao com o banco de dados
+            </summary>
+            <param name="pParam">Objeto detentor dos parametros de conexao.</param> 
+            <returns>Retorna o valor verdadeiro se a conexao for realizada com sucesso.</returns> 
+        </member>
+        <member name="M:Nampula.DI.DataBaseAdapter.GetServerDate">
+            <summary>
+            Pega a data do Servidor
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="E:Nampula.DI.DataBaseAdapter.OnBeforeCreate">
+            <summary>
+            Evento disparado antes de criar o banco de dados
+            </summary>
+        </member>
+        <member name="E:Nampula.DI.DataBaseAdapter.OnBeforeUpdate">
+            <summary>
+            Evento disparado antes de alterar o schema do banco de dados
+            </summary>
+        </member>
+        <member name="E:Nampula.DI.DataBaseAdapter.OnAfterCreate">
+            <summary>
+            Evento disparado depois de criar o banco de dados
+            </summary>
+        </member>
+        <member name="E:Nampula.DI.DataBaseAdapter.OnAfterUpdate">
+            <summary>
+            Evento disparado depois de alterar o banco de dados
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.DataBaseAdapter.DataBaseName">
+            <summary>
+            Nome do banco de dados
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.DataBaseAdapter.Tables">
+            <summary>
+            Lista de Tabelas
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.DataBaseAdapter.StoredProcedures">
+            <summary>
+            Lista de Stored Procedures
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.DataBaseAdapter.Assembly">
+            <summary>
+            Assembly da Aplicação
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.DataBaseAdapter.NotCheckVersion">
+            <summary>
+            Verfica se deve ou não checkar a versão do banco de dados
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.DBEventArgs">
+            <summary>
+            Argumentos do s Eventos do Banco de dados
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.AppVersion">
+            <summary>
+            Tabela de Gerenciamento da Versão do Banco de Dados
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.AppVersion.#ctor">
+            <summary>
+            Construtor padrão
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.AppVersion.FieldsName">
+            <summary>
+            Nome dos Campos
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.AppVersion.Description">
+            <summary>
+            Descrição dos Campos
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.eOrder">
+            <summary>
+            Direção da Ordenação
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.eJoinRelationShip">
+            <summary>
+            Tipo de Relacionamento do Join
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.eUnionType">
+            <summary>
+            Tipo de Union
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.eCondition">
+            <summary>
+            Tipo de Condição 
+            </summary>
+        </member>
+        <member name="F:Nampula.DI.eCondition.ecNone">
+            <summary>
+            Não incializado
+            </summary>
+        </member>
+        <member name="F:Nampula.DI.eCondition.ecEqual">
+            <summary>
+            Igual a ( = )
+            </summary>
+        </member>
+        <member name="F:Nampula.DI.eCondition.ecGraterThan">
+            <summary>
+            Maior que ( > )
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:Nampula.DI.eCondition.ecLessThan" -->
+        <member name="F:Nampula.DI.eCondition.ecGraterEqual">
+            <summary>
+            Maior ou Igual (>=)
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:Nampula.DI.eCondition.ecLessEqual" -->
+        <!-- Badly formed XML comment ignored for member "F:Nampula.DI.eCondition.ecNotEqual" -->
+        <member name="F:Nampula.DI.eCondition.ecLike">
+            <summary>
+            Que contenha ( Like ) .
+            </summary>
+        </member>
+        <member name="F:Nampula.DI.eCondition.ecNotLike">
+            <summary>
+            Não contenha ( Not Like ).
+            </summary>
+        </member>
+        <member name="F:Nampula.DI.eCondition.ecLikeStart">
+            <summary>
+            Inicia com ( Like ...%).
+            </summary>
+        </member>
+        <member name="F:Nampula.DI.eCondition.ecLikeEnd">
+            <summary>
+            Termina com (Like %...).
+            </summary>
+        </member>
+        <member name="F:Nampula.DI.eCondition.ecBetween">
+            <summary>
+            Entre (A1...An).
+            </summary>
+        </member>
+        <member name="F:Nampula.DI.eCondition.ecNotBetween">
+            <summary>
+            Não esta entre (A1...An).
+            </summary>
+        </member>
+        <member name="F:Nampula.DI.eCondition.ecIsNull">
+            <summary>
+            É nulo.
+            </summary>
+        </member>
+        <member name="F:Nampula.DI.eCondition.ecNotNull">
+            <summary>
+            Não é nulo.
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.eRelationship">
+            <summary>
+            Operador de Relacionamento
+            </summary>
+        </member>
+        <member name="F:Nampula.DI.eRelationship.erNone">
+            <summary>
+            Não inicializado
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:Nampula.DI.eRelationship.erAnd" -->
+        <member name="F:Nampula.DI.eRelationship.erOr">
+            <summary>
+            Operador Lógico OR (||) 
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.eDataServerType">
+            <summary>
+            Tipo do Servidor
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.eMoveCommand">
+            <summary>
+            Movimentação da Tabela
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.eMoveResult">
+            <summary>
+            Resultado do registro
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.eEndTrans">
+            <summary>
+            Tipo de Finalização de transação
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.eState">
+            <summary>
+            Estado do Registro no Banco de dados
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.Logs.LogDifferences">
+            <summary>
+            Registro de Alterações
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.Logs.LogDifferences.Instance">
+            <summary>
+            Instancia do Registro
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.Logs.LogDifferences.Date">
+            <summary>
+            Data de Alteração
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.Logs.LogDifferences.MachineName">
+            <summary>
+            Nome da Máquina
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.Logs.LogDifferences.FieldName">
+            <summary>
+            Nome do Campo
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.Logs.LogDifferences.FieldDescription">
+            <summary>
+            Descrição do Campo
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.Logs.LogDifferences.OldValue">
+            <summary>
+            Valor Antigo
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.Logs.LogDifferences.NewValue">
+            <summary>
+            Novo valor
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.Logs.LogDifferences.UserName">
+            <summary>
+            Nome do Usuário
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.Logs.LogDifferences.FieldsName">
+            <summary>
+            Nome dos campos do registro de alterações
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.Logs.LogDifferences.FieldsDescription">
+            <summary>
+            Descrição dos campos do registro de alterações
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.Logs.TableAdapterLog">
+            <summary>
+            Tabela de tratamento de log de alterações
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.Logs.TableAdapterLog.#ctor(Nampula.DI.TableAdapter)">
+            <summary>
+            Instanciar o TableLog
+            </summary>
+            <param name="tableAdapter">Tabela Base de Criação de Log</param>
+        </member>
+        <member name="M:Nampula.DI.Logs.TableAdapterLog.GetColumns">
+            <summary>
+            Lista dos campos da tabela de log
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Nampula.DI.Logs.TableAdapterLog.GetDiffStartBy(System.Data.DataRow)">
+            <summary>
+            Obetem as diferenças entre o último log até o log passado
+            </summary>
+            <param name="logDataRow">Log Inicial</param>
+            <returns>Uma lista de diferenças entre os registros</returns>
+        </member>
+        <member name="M:Nampula.DI.Logs.TableAdapterLog.GetDiff(System.Data.DataTable,System.Data.DataRow,System.Data.DataRow)">
+            <summary>
+            Pega a diferença entre os 2 registros
+            </summary>
+            <param name="dataTable">Tabela de log na memória</param>
+            <param name="from">Comparar de</param>
+            <param name="to">Comparar com</param>
+            <returns>Lista de Campos que estão diferentes</returns>
+        </member>
+        <member name="M:Nampula.DI.Logs.TableAdapterLog.GetLogFields">
+            <summary>
+            Obtem os nomes dos campos somento do log e não da tabela base
+            </summary>
+            <returns>Lista de Campos</returns>
+        </member>
+        <member name="M:Nampula.DI.Logs.TableAdapterLog.GetByBaseId">
+            <summary>
+            Obtem a lista de log apartir de um id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Nampula.DI.Logs.TableAdapterLog.Detach">
+            <summary>
+            Remover link de eventos
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.Logs.TableAdapterLog.BaseIdLog">
+            <summary>
+            Chaves do registro de origem
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.Logs.TableAdapterLog.InstanceLog">
+            <summary>
+            Id da instancia de atualização
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.Logs.TableAdapterLog.FieldsName">
+            <summary>
+            Nomes dos Campos da Tabela de Log
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.Logs.TableAdapterLog.FieldsDescription">
+            <summary>
+            Nome dos campos da tabela de log
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.Join">
+            <summary>
+            Classe para tratamento de clausula join
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.Join.#ctor">
+            <summary>
+            Construtor padrão
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.Join.#ctor(Nampula.DI.TableQuery,Nampula.DI.WhereCollection)">
+            <summary>
+            Instancia um objeto
+            </summary>
+            <param name="pTableQuery">Um objeto TableQuery de origem</param>
+            <param name="pOn">Clausula on</param>
+        </member>
+        <member name="M:Nampula.DI.Join.#ctor(Nampula.DI.Join)">
+            <summary>
+            Clona o objeto
+            </summary>
+            <param name="pJoin">Objeto de Origem</param>
+        </member>
+        <member name="P:Nampula.DI.Join.RelationShip">
+            <summary>
+            Tipo de Relacionamento
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.Join.TableQuery">
+            <summary>
+            Um TableQuery
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.Join.FieldName">
+            <summary>
+            Nome do parametro de relacionamento mais a esquerda
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.Join.On">
+            <summary>
+            Clausla On
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.CommandService">
+            <summary>
+            Consulta de dados no banco de dados
+            </summary>
+        </member>
+        <member name="F:Nampula.DI.CommandService.PageIdFieldName">
+            <summary>
+            Nome do Campo que define o Id da Query
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.CommandService.SqlQuery(Nampula.DI.TableQuery,System.Int32,System.Int32,System.String,Nampula.DI.eOrder)">
+            <summary>
+            Executa uma consulta páginaa no banco e retorna o resultado
+            </summary>
+            <param name="pQuery">Consulta</param>
+            <param name="pPage">Página</param>
+            <param name="pRowsByPage">Linhas por página</param>
+            <param name="pSortFieldName">Campo para ordenação</param>
+            <param name="pSortDirection">Direação da Ordenação</param>
+            <returns>Um consulta com o resultado</returns>
+        </member>
+        <member name="M:Nampula.DI.TableAdapterExtetions.SetState``1(System.Collections.Generic.IEnumerable{``0},Nampula.DI.eState)">
+            <summary>
+            Altera o estado da coleção
+            </summary>
+            <typeparam name="TT">O Tipo do TableAdapter</typeparam>
+            <param name="pColection">UMa ista de tableadpaters</param>
+            <param name="pNewState">O Novo estado</param>
+        </member>
+        <member name="M:Nampula.DI.TableAdapterExtetions.ToDataTable``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Converte a lista para um dataTable
+            </summary>
+            <typeparam name="TT">O tipo do TableAdapte</typeparam>
+            <param name="pCollection">Uma Lista de TableAdapters</param>
+            <returns>Um DataTable</returns>
+        </member>
+        <member name="T:Nampula.DI.TableQueryPaged">
+            <summary>
+            Consulta páginada
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableQueryPaged.Page">
+            <summary>
+            Pagina atual
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableQueryPaged.PageCount">
+            <summary>
+            Número de Página
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableQueryPaged.RowsByPage">
+            <summary>
+            Linha por página
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableQueryPaged.Count">
+            <summary>
+            Quantidade de registros
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableQueryPaged.SortFieldName">
+            <summary>
+            Ordernar pelo campo
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableQueryPaged.SortFieldDirection">
+            <summary>
+            Direção da ordenação
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableQueryPaged.Query">
+            <summary>
+            Consulta
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableQueryPaged.Data">
+            <summary>
+            DataTable
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.sp_HelpText">
+            <summary>
+            Procedure que traz o conteúdo de uma procedure no banco de dados
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.sp_HelpText.DbName">
+            <summary>
+            Nome do Banco de dados
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.OrderBy">
+            <summary>
+            Classe para gerenciamento de Ordenação da Query
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.OrderBy.#ctor">
+            <summary>
+            Construtor padrão
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.OrderBy.#ctor(Nampula.DI.OrderBy)">
+            <summary>
+            Instancia e clona o onketo
+            </summary>
+            <param name="pOrderBy">Um objeto OrderBy</param>
+        </member>
+        <member name="M:Nampula.DI.OrderBy.#ctor(Nampula.DI.QueryParam)">
+            <summary>
+            Ordena de forma ascendente apartir do objeto
+            </summary>
+            <param name="pField">Um QueryParam</param>
+        </member>
+        <member name="M:Nampula.DI.OrderBy.#ctor(Nampula.DI.QueryParam,Nampula.DI.eOrder)">
+            <summary>
+            Instancia e o objeto e define o campoe a ordenação
+            </summary>
+            <param name="pField">Campo de Ordenação</param>
+            <param name="pOrder">Tipo de Ordenação</param>
+        </member>
+        <member name="P:Nampula.DI.OrderBy.Field">
+            <summary>
+            Campo de ordenação
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.OrderBy.Order">
+            <summary>
+            Tipo de Ordenação
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.QueryParam">
+            <summary>
+            Parametro de consulta do TableQuery
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.QueryParam.#ctor">
+            <summary>
+            Construtor padrão
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.QueryParam.#ctor(Nampula.DI.QueryParam)">
+            <summary>
+            Insancia o classe apartir de um objeto 
+            </summary>
+            <param name="pQueryParam">Objeto de Origem</param>
+        </member>
+        <member name="M:Nampula.DI.QueryParam.#ctor(Nampula.DI.TableAdapterField)">
+            <summary>
+            Instancia a classe atrav;es de um tableField
+            </summary>
+            <param name="field">Um TableAdapterField</param>
+        </member>
+        <member name="M:Nampula.DI.QueryParam.#ctor(Nampula.DI.TableAdapterField,System.Object)">
+            <summary>
+            Instancia a classe e atribui a condiciona de igual ao campo valor
+            </summary>
+            <param name="field">Um tableFiel</param>
+            <param name="pValue1">Um valor</param>
+        </member>
+        <member name="M:Nampula.DI.QueryParam.#ctor(Nampula.DI.TableAdapterField,System.Object,System.Object)">
+             <summary>
+            Instancia a classe e atribui a condiciona de Between
+             </summary>
+             <param name="pField">Um TableAdaterField</param>
+             <param name="pValue1">Primeiro valor, de</param>
+             <param name="pValue2">Segundo valor, até.</param>
+        </member>
+        <member name="M:Nampula.DI.QueryParam.#ctor(Nampula.DI.TableAdapterField,Nampula.DI.eCondition)">
+            <summary>
+            Instancia a classe através do objeto TableField e atribui uma condicional que não exige valor.
+            </summary>
+            <param name="pField">Um TableAdaterField</param>
+            <param name="pCondition">Uma condição</param>
+        </member>
+        <member name="M:Nampula.DI.QueryParam.#ctor(Nampula.DI.TableAdapterField,Nampula.DI.eCondition,System.Object)">
+            <summary>
+            Instancia a classe através do objeto TableField e atribui uma condicional que exige valor.
+            </summary>
+            <param name="pField">Um TableAdaterField</param>
+            <param name="pCondition">Uma condição</param>
+            <param name="pValue1">Um valor qualquer</param>
+        </member>
+        <member name="M:Nampula.DI.QueryParam.#ctor(Nampula.DI.TableAdapterField,Nampula.DI.eCondition,System.Object,System.Object)">
+            <summary>
+            Instancia a classe através do objeto TableField e atribui uma condicional que exige 2 valores.
+            </summary>
+            <param name="pField">Um TableAdaterField</param>
+            <param name="pCondition">Uma condição</param>
+            <param name="pValue1">Um valor qualquer</param>
+            <param name="pValue2">Um segundo valor</param>
+        </member>
+        <member name="M:Nampula.DI.QueryParam.#ctor(System.String,System.Data.DbType,System.Object)">
+            <summary>
+            Instancia um classe de acordo com os dados do nome do campo tipo e valor.
+            </summary>
+            <param name="pFieldName">Nome do Campo</param>
+            <param name="pDbType">Tipo do Campo</param>
+            <param name="pValue1">Valor do Campos</param>
+        </member>
+        <member name="M:Nampula.DI.QueryParam.#ctor(System.String,System.Data.DbType,System.Object,System.Object)">
+            <summary>
+            Instancia um classe de acordo com os dados do nome do campo tipo e dois valores.
+            </summary>
+            <param name="pFieldName">Nome do Campo</param>
+            <param name="pDbType">Tipo do Campo</param>
+            <param name="pValue1">Valor do Campo 1</param>
+            <param name="pValue2">Valor do campo 2</param>
+        </member>
+        <member name="M:Nampula.DI.QueryParam.#ctor(System.String,System.Data.DbType,System.Object,Nampula.DI.eCondition)">
+            <summary>
+            Instancia um classe de acordo com os dados do nome do campo tipo valor e condicional
+            </summary>
+            <param name="pFieldName">Nome do Campo</param>
+            <param name="pDbType">Tipo do Campo</param>
+            <param name="pValue1">Valor do Campo 1</param>
+            <param name="pCondition">Condição</param>
+        </member>
+        <member name="M:Nampula.DI.QueryParam.#ctor(System.String,System.Data.DbType,System.Object,System.Object,Nampula.DI.eCondition)">
+            <summary>
+            Instancia um classe de acordo com os dados do nome do campo tipo valor e condicional
+            </summary>
+            <param name="pFieldName">Nome do Campo</param>
+            <param name="pDbType">Tipo do Campo</param>
+            <param name="pValue1">Valor do Campo 1</param>
+            <param name="pValue2">Valor do campo 2</param>
+            <param name="pCondition">Condição</param>
+        </member>
+        <member name="M:Nampula.DI.QueryParam.SetConditionValue(System.Object,System.Object)">
+            <summary>
+            Atribui uma condição bettwen, Maior Que ou Meor e igual a, de acordo com os valores
+            passados.. normalmente esse recurso é usado com datas.
+            </summary>
+            <param name="pValue1">Valor 1</param>
+            <param name="pValue2">Valor 2</param>
+        </member>
+        <member name="P:Nampula.DI.QueryParam.AliasTableName">
+            <summary>
+            Apelido da Tabela
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.QueryParam.FieldName">
+            <summary>
+            Nome do Campo
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.QueryParam.AliasName">
+            <summary>
+            Apelido do Banco
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.QueryParam.Condition">
+            <summary>
+            Condição
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.QueryParam.Relationship">
+            <summary>
+            Relacionamento Lógico
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.QueryParam.Value1">
+            <summary>
+            Primeiro valor avaliado
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.QueryParam.Value2">
+            <summary>
+            Sedundo valor avaliado
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.QueryParam.DbType">
+            <summary>
+            Tipo do Campo
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.QueryParam.Value1Column">
+            <summary>
+            Primeiro valor avaliado para outro campo
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.QueryParam.Value2Column">
+            <summary>
+            Segundo valor avaliado para o outtro campo
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.TableQuery">
+            <summary>
+            Construtor de Consultas no banco de dados
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.TableQuery.#ctor">
+            <summary>
+            Construtor padrão
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.TableQuery.#ctor(Nampula.DI.TableQuery)">
+            <summary>
+            Instancie o objeto e clona
+            </summary>
+            <param name="pTableQuery">Objeto table query</param>
+        </member>
+        <member name="M:Nampula.DI.TableQuery.#ctor(Nampula.DI.TableAdapter,System.Boolean)">
+            <summary>
+            Instancia um objeto e atribui as chaves como compos de condição 
+            </summary>
+            <param name="pTableAdapter">Um table adapter</param>
+            <param name="pKeysAsWhere"></param>
+        </member>
+        <member name="M:Nampula.DI.TableQuery.#ctor(Nampula.DI.TableAdapter,System.Boolean,System.String)">
+            <summary>
+            Instancia um objeto e atribui um alias para uma pesquisa mais complexa.
+            </summary>
+            <param name="pTableAdapter">Um TableAdpter</param>
+            <param name="pWithFields">Chaves como clásula where</param>
+            <param name="pAlias">Alias da tabela</param>
+        </member>
+        <member name="P:Nampula.DI.TableQuery.DbName">
+            <summary>
+            Nome do Banco de dados
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableQuery.TableName">
+            <summary>
+            Nome da Tabela
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableQuery.FieldName">
+            <summary>
+            Nome do Campo Chave
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableQuery.Alias">
+            <summary>
+            Alias da Tabela
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableQuery.SchemaTable">
+            <summary>
+            Tabela de Schema do banco de dados
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableQuery.WithoutNotLock">
+            <summary>
+            NÃO incluir wiht(nolock)
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableQuery.Fields">
+            <summary>
+            Lista de Campos
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableQuery.OrderBy">
+            <summary>
+            Lista de Ordenação
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableQuery.Joins">
+            <summary>
+            Lista de Joins
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableQuery.Union">
+            <summary>
+            Tipo de Union
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableQuery.InternalQuery">
+            <summary>
+            Lista de Table Querys alinhados
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableQuery.Distinct">
+            <summary>
+            Adicionar a clausula Disctinct a query
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableQuery.Top">
+            <summary>
+            Número máximo de registros de retorno.
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableQuery.Where">
+            <summary>
+            Primeira condição da clausula where
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableQuery.Wheres">
+            <summary>
+            Lista de clauslas where
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.WhereCollection">
+            <summary>
+            Lista de COndições para pesquisas
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.WhereCollection.#ctor">
+            <summary>
+            Construtor
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.WhereCollection.#ctor(Nampula.DI.QueryParam)">
+            <summary>
+            Construtor com QueryParam
+            </summary>
+            <param name="pQueryParam"></param>
+        </member>
+        <member name="M:Nampula.DI.WhereCollection.#ctor(Nampula.DI.WhereCollection)">
+            <summary>
+            Clonar a collection
+            </summary>
+            <param name="pWhereCollection">Query a ser collection</param>
+        </member>
+        <member name="P:Nampula.DI.WhereCollection.Relation">
+            <summary>
+            Relacção entre as wheres
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.StoredProcedureEventArgs">
+            <summary>
+            Argumentos dos eventos da procedure
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.StoredProcedureEventArgs.Cancel">
+            <summary>
+            Canelar o procedimento
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.ChangeStateEventHandler">
+            <summary>
+            Delegate para evento de alteração de estado do table adapter
+            </summary>
+            <param name="sender">Objeto que disprou</param>
+            <param name="e">Argumentos do Evento</param>
+        </member>
+        <member name="T:Nampula.DI.ChangeStateEventArgs">
+            <summary>
+            Artgumentos do Evento de Alteração de Statado
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.eFieldType">
+            <summary>
+            Tipo de Campo
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.Log">
+            <summary>
+            Uma mensagem de texto ou um erro que deseja gerar
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.Log.User">
+            <summary>
+            Usuário
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.Log.DateTime">
+            <summary>
+            Data
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.Log.Message">
+            <summary>
+            Memsagam
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.Log.Exception">
+            <summary>
+            Exceção
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.TableAdapterColumns">
+            <summary>
+            Classe para gerenciamento das colunas das classe de TableAdapters e StoredProcedures
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.TableAdapterColumns.GetCollumns(Nampula.DI.DataObject)">
+            <summary>
+            Pega as colunas de um objeto DataObjec
+            </summary>
+            <param name="pObject">Um Objeto</param>
+            <returns>Uma lista de campis</returns>
+        </member>
+        <member name="M:Nampula.DI.TableAdapterColumns.GetFields(System.Type)">
+            <summary>
+            Pega as informações de propriedades dos campos
+            </summary>
+            <param name="pObject">Um Objeto</param>
+            <returns>Uma lista de variáveis locais</returns>
+        </member>
+        <member name="T:Nampula.DI.TableAdapterDomain`1">
+            <summary>
+            Classe base para uma tabela de domninio
+            </summary>
+            <typeparam name="T">Deve ser um enum</typeparam>
+        </member>
+        <member name="M:Nampula.DI.TableAdapterDomain`1.GetByKey(`0)">
+            <summary>
+            Consulta o registro pelo código.
+            </summary>
+            <param name="pID">Código.</param>
+            <returns>Verdadeiro, se retornou o ok, caso contrário, falso.</returns>
+        </member>
+        <member name="M:Nampula.DI.TableAdapterDomain`1.GetAllOrder">
+            <summary>
+            Pega todos os registro que tem na tabela ordenado por código
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Nampula.DI.TableAdapterDomain`1.ID">
+            <summary>
+            Id do Registro
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableAdapterDomain`1.Description">
+            <summary>
+            Descrição do Registro
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.TableAdapterDomain`1.FieldsName">
+            <summary>
+            Objeto com o nome de cada coluna do banco de dados.
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.TableAdapterDomain`1.FieldsDescription">
+            <summary>
+            Objeto com a descrição de cada coluna do banco de dados.
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.TableAdapterEventHandler">
+            <summary>
+            Delegate para eventos de TableAdapters
+            </summary>
+            <param name="sender">Objeto que disprou</param>
+            <param name="e">Argumentos do Evento</param>
+        </member>
+        <member name="T:Nampula.DI.TableAdapterEventArgs">
+            <summary>
+            Artgumentos do Evento do TableAdapter
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.TableAdapterField">
+            <summary>
+            Um campo na tabela
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.TableAdapterField.#ctor">
+            <summary>
+            Cria um novo campo
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.TableAdapterField.#ctor(Nampula.DI.TableAdapterField)">
+            <summary>
+            Cosntrutor padrão
+            </summary>
+            <param name="pTableAdapterField"></param>
+        </member>
+        <member name="M:Nampula.DI.TableAdapterField.#ctor(System.String,System.String,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="pName"></param>
+            <param name="pDescription"></param>
+            <param name="size"></param>
+        </member>
+        <member name="M:Nampula.DI.TableAdapterField.#ctor(System.String,System.String,System.Int32,System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="pName"></param>
+            <param name="pDescription"></param>
+            <param name="pSize"></param>
+            <param name="pValue"></param>
+        </member>
+        <member name="M:Nampula.DI.TableAdapterField.#ctor(System.String,System.String,System.Data.DbType)">
+            <summary>
+            
+            </summary>
+            <param name="pName"></param>
+            <param name="pDescription"></param>
+            <param name="pDbType"></param>
+        </member>
+        <member name="M:Nampula.DI.TableAdapterField.#ctor(System.String,System.String,System.Data.DbType,System.Int32,System.Object,System.Boolean,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="pName"></param>
+            <param name="pDescription"></param>
+            <param name="pDbType"></param>
+            <param name="pSize"></param>
+            <param name="pValue"></param>
+            <param name="pKey"></param>
+            <param name="pIdentity"></param>
+        </member>
+        <member name="M:Nampula.DI.TableAdapterField.#ctor(System.String,System.String,System.Data.DbType,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="pName"></param>
+            <param name="pDescription"></param>
+            <param name="pDbType"></param>
+            <param name="pPrecision"></param>
+            <param name="pScale"></param>
+        </member>
+        <member name="M:Nampula.DI.TableAdapterField.GetString">
+            <summary>
+            Pega o valor como string
+            </summary>
+            <returns>Um String</returns>
+        </member>
+        <member name="M:Nampula.DI.TableAdapterField.GetInt16">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Nampula.DI.TableAdapterField.GetInt32">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Nampula.DI.TableAdapterField.GetInt64">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Nampula.DI.TableAdapterField.GetUInt16">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Nampula.DI.TableAdapterField.GetUInt32">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Nampula.DI.TableAdapterField.GetUInt64">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Nampula.DI.TableAdapterField.GetDecimal">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Nampula.DI.TableAdapterField.GetBool">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Nampula.DI.TableAdapterField.GetBoolean">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Nampula.DI.TableAdapterField.GetDateTime">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Nampula.DI.TableAdapterField.GetDouble">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Nampula.DI.TableAdapterField.GetFloat">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Nampula.DI.TableAdapterField.GetChar">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Nampula.DI.TableAdapterField.DbTypeIsNumeric">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Nampula.DI.TableAdapterField.GetDbType">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Nampula.DI.TableAdapterField.ToString">
+            <summary>
+            Converte o valor da classe para string, usado para facilitar debug
+            </summary>
+            <returns>Um String [Nome do Campo] [Valor do Campo]</returns>
+        </member>
+        <member name="M:Nampula.DI.TableAdapterField.SetValue``1(``0)">
+            <summary>
+            Atribui um novo valor a coluna
+            </summary>
+            <typeparam name="TT">Tipo do Objeto</typeparam>
+            <param name="newValue">Novo Valor do Camp</param>
+        </member>
+        <member name="P:Nampula.DI.TableAdapterField.TableAdapter">
+            <summary>
+            TableAdapter coluna
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableAdapterField.TableAlias">
+            <summary>
+            Alias da Tabela exempo [Nome da Tabel] T0
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableAdapterField.Alias">
+            <summary>
+            Alias do Campos
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableAdapterField.Name">
+            <summary>
+            Nome do Campos
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableAdapterField.Description">
+            <summary>
+            Descrição
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableAdapterField.DbType">
+            <summary>
+            Tipo do Campos
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableAdapterField.DefaultValue">
+            <summary>
+            Valor padrão
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableAdapterField.Size">
+            <summary>
+            Tamanho do Campo
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableAdapterField.Key">
+            <summary>
+            Eh uma chave
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableAdapterField.Identity">
+            <summary>
+            Auto Incremental
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableAdapterField.Precision">
+            <summary>
+            Precisao do Numero
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableAdapterField.Scale">
+            <summary>
+            Escala decimal
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableAdapterField.FieldType">
+            <summary>
+            Tipo de Consulta
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableAdapterField.Value">
+            <summary>
+            Valor do campos
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableAdapterField.ValueNew">
+            <summary>
+            Novo valor a ser atribuido no campo Value
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableAdapterField.ValueOld">
+            <summary>
+            Valor antigo relacionado ao Value
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableAdapterField.LockNotify">
+            <summary>
+            Bloquei notificações de alteração
+            </summary>
+        </member>
+        <member name="E:Nampula.DI.TableAdapterField.PropertyChanged">
+            <summary>
+            Evento disparado quando alguma atualização é realizada
+            </summary>
+        </member>
+        <member name="E:Nampula.DI.TableAdapterField.PropertyChanging">
+            <summary>
+            Evento disparado quando alguma atualização está sendo realizada
+            </summary>
+        </member>
+        <member name="T:Nampula.DI.TableAdapterFieldCollection">
+            <summary>
+            Lista de Campos do tableAdapterField
+            </summary>
+        </member>
+        <member name="M:Nampula.DI.TableAdapterFieldCollection.#ctor(Nampula.DI.TableAdapterFieldCollection)">
+            <summary>
+            
+            </summary>
+            <param name="pTableAdapterFieldCollection"></param>
+        </member>
+        <member name="M:Nampula.DI.TableAdapterFieldCollection.Add(Nampula.DI.TableAdapterField,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="item"></param>
+            <param name="pTableAlias"></param>
+        </member>
+        <member name="M:Nampula.DI.TableAdapterFieldCollection.Insert(System.Int32,Nampula.DI.TableAdapterField,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="index"></param>
+            <param name="item"></param>
+            <param name="pTableAlias"></param>
+        </member>
+        <member name="M:Nampula.DI.TableAdapterFieldCollection.Add(Nampula.DI.TableAdapterField,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="item"></param>
+            <param name="pTableAlias"></param>
+            <param name="pAlias"></param>
+        </member>
+        <member name="P:Nampula.DI.TableAdapterFieldCollection.AllFields">
+            <summary>
+            Todos os campos
+            </summary>
+        </member>
+        <member name="P:Nampula.DI.TableAdapterFieldCollection.Item(System.String)">
+            <summary>
+            Indice
+            </summary>
+            <param name="pColumName"></param>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,5 @@
+C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoDI\bin\Debug\ClassLibrary1.dll
+C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoDI\bin\Debug\ClassLibrary1.pdb
+C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoDI\obj\Debug\NampulaDemoDI.csprojResolveAssemblyReference.cache
+C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoDI\obj\Debug\ClassLibrary1.dll
+C:\Users\Mathias\Documents\Visual Studio 2015\Projects\NampulaDemo\src\NampulaDemoDI\obj\Debug\ClassLibrary1.pdb
